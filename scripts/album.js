@@ -28,6 +28,20 @@ var albumMarconi = {
     ]
 };
 
+var albumBonIver = {
+    title: 'Bon Iver',
+    artist: 'Bon Iver',
+    label: 'Label Name',
+    year: '2012',
+    albumArtUrl: 'assets/images/album_covers/20.png',
+    songs: [
+        { title: 'Beth/Rest', duration: '3:09' },
+        { title: 'Holocene', duration: '5:01' },
+        { title: 'Towers', duration: '4:21'},
+        { title: 'Hinnom, TX', duration: '6:31' }
+    ]
+};
+
 var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -40,12 +54,13 @@ var createSongRow = function(songNumber, songName, songLength) {
      return template;
  };
 
+ var albumTitle = document.getElementsByClassName('album-view-title')[0];
+ var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+ var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+ var albumImage = document.getElementsByClassName('album-cover-art')[0];
+ var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
  var setCurrentAlbum = function(album) {
-     var albumTitle = document.getElementsByClassName('album-view-title')[0];
-     var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-     var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-     var albumImage = document.getElementsByClassName('album-cover-art')[0];
-     var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
      albumTitle.firstChild.nodeValue = album.title;
      albumArtist.firstChild.nodeValue = album.artist;
@@ -53,7 +68,7 @@ var createSongRow = function(songNumber, songName, songLength) {
      albumImage.setAttribute('src', album.albumArtUrl);
 
      albumSongList.innerHTML = '';
- 
+
      for (var i = 0; i < album.songs.length; i++) {
          albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
      }
@@ -61,4 +76,19 @@ var createSongRow = function(songNumber, songName, songLength) {
 
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
+     var albumArray = [
+       albumPicasso,
+       albumMarconi,
+       albumBonIver
+     ]
+     var i = 0
+   albumImage.addEventListener('click', function()
+   {
+       setCurrentAlbum(albumArray[i]);
+       i++;
+
+       if(i == albumArray.length) {
+         i = 0;
+       }
+   });
  };
