@@ -86,6 +86,7 @@ var createSongRow = function(songNumber, songName, songLength) {
        if (event.target.parentElement.className === 'album-view-song-item') {
          event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
        }
+       
      });
 
      for (var i = 0; i < songRows.length; i++) {
